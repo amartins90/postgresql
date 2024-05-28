@@ -1,0 +1,16 @@
+services:
+  postgres:
+    image: postgres:14.0
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=s3cr3t
+      - POSTGRES_DB=dvdrental
+    ports:
+      - "5432:5432"
+    logging:
+      options:
+        max-size: 10m
+        max-file: "3"
+    volumes:
+      - ./sample:/sample
+      - ./script/restore.sh:/docker-entrypoint-initdb.d/restore.sh
